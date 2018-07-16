@@ -3,6 +3,8 @@ package com.capgemini.chess.algorithms.implementation;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.swing.text.html.HTMLDocument.HTMLReader.BlockAction;
+
 import com.capgemini.chess.algorithms.data.Coordinate;
 import com.capgemini.chess.algorithms.data.Move;
 import com.capgemini.chess.algorithms.data.enums.BoardState;
@@ -232,9 +234,20 @@ public class BoardManager {
 	}
 
 	private Move validateMove(Coordinate from, Coordinate to) throws InvalidMoveException, KingInCheckException {
+		Piece piece = board.getPieceAt(from);
+		MoveValidator moveValidator = new MoveValidator();
+		Move move = new Move();
 
-		// TODO please add implementation here
-		return null;
+		boolean isMoveValid = moveValidator.moveValidation(piece, from, to);
+		if (isMoveValid) {
+			move.setFrom(from);
+			move.setTo(to);
+			move.setMovedPiece(piece);
+			move.setType(MoveType.ATTACK);
+		}
+
+		return move;
+
 	}
 
 	private boolean isKingInCheck(Color kingColor) {
@@ -246,6 +259,7 @@ public class BoardManager {
 	private boolean isAnyMoveValid(Color nextMoveColor) {
 
 		// TODO please add implementation here
+		// czy jakas figura moze sie ruszyc
 
 		return false;
 	}
