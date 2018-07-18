@@ -5,28 +5,54 @@ import com.capgemini.chess.algorithms.data.enums.Color;
 import com.capgemini.chess.algorithms.data.enums.MoveType;
 import com.capgemini.chess.algorithms.data.generated.Board;
 import com.capgemini.chess.algorithms.implementation.exceptions.InvalidMoveException;
-import com.capgemini.chess.algorithms.implementation.exceptions.InvalidPawnMoveException;
 
-public class Pawn extends PieceAbstraction {
+public class Pawn extends PieceAbstraction implements MovesAllowed {
 
 	public Pawn(Color color) {
 		super(color);
 	}
 
+	int deltaX;
+	int deltaY;
+
 	@Override
 	public MoveType checkMoveValid(Board board, Coordinate from, Coordinate to) throws InvalidMoveException {
-		// TODO Auto-generated method stub
-		return null;
+		initialPawnValidation(from, to);
+		return getMoveType(board, from, to);
+
 	}
 
 	@Override
 	protected void validateMoveDirection(Coordinate from, Coordinate to) throws InvalidMoveException {
-		int deltaX = from.getX() - to.getX();
-		int deltaY = from.getY() - to.getY();
-		if (!((Math.abs(deltaY) == 2 && deltaX == 0) || Math.abs(deltaY) == 1) && deltaX == 0) {
-			throw new InvalidPawnMoveException();
+		if (color.equals(Color.BLACK)) {
+			if (!isWestDirection(deltaX, deltaY) || isSouthWestDirection(deltaX, deltaY)
+					|| isNorthWestDirection(deltaX, deltaY)) {
+				throw new InvalidMoveException("Pawn cant move there. It is against rules for this piece");
+			}
+		} else {
+			if (!(isNorthEastDirection(deltaX, deltaY) || isEastDirection(deltaX, deltaY)
+					|| isSouthEastDirection(deltaX, deltaY))) {
+				throw new InvalidMoveException("Pawn cant move there. It is against rules for this piece");
+			}
 		}
-		// pawn moze ruszac sie o maksymalnie 2 pola jezeli to jest jego
-		// pierwszy ruch +do sprawdyenia warunki
+
 	}
+
+	private void initialPawnValidation(Coordinate from, Coordinate to) throws InvalidMoveException {
+		setDeltaXAndDeltaY(from, to);
+		validateMoveDirection(from, to);
+		validateDistanceForPawn(from, to);
+	}
+
+	private void setDeltaXAndDeltaY(Coordinate from, Coordinate to) {
+		deltaX = from.getX() - to.getX();
+		deltaY = from.getY() - to.getY();
+	}
+
+	private void validateDistanceForPawn(Coordinate from, Coordinate to) throws InvalidMoveException {
+		if (!((Math.abs(deltaY) == 2 && deltaX == 0) || Math.abs(deltaY) == 1)) {
+			throw new InvalidMoveException("Pawn cant move more than 2 square");
+		}
+	}
+
 }

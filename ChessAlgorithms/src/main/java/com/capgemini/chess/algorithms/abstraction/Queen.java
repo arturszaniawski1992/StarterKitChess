@@ -6,6 +6,7 @@ import com.capgemini.chess.algorithms.data.enums.MoveType;
 import com.capgemini.chess.algorithms.data.generated.Board;
 import com.capgemini.chess.algorithms.implementation.exceptions.InvalidMoveException;
 import com.capgemini.chess.algorithms.implementation.exceptions.InvalidQueenMoveException;
+import com.capgemini.chess.algorithms.implementation.exceptions.PathIsNoClearException;
 
 public class Queen extends PieceAbstraction implements MovesAllowed {
 
@@ -15,8 +16,14 @@ public class Queen extends PieceAbstraction implements MovesAllowed {
 
 	@Override
 	public MoveType checkMoveValid(Board board, Coordinate from, Coordinate to) throws InvalidMoveException {
-		// TODO Auto-generated method stub
-		return null;
+		validateMoveDirection(from, to);
+		int pathToPiece = Math.abs(from.getX()) - Math.abs(to.getX());
+		try {
+			validateMoveAndClearPath(board, from, to, pathToPiece);
+		} catch (PathIsNoClearException e) {
+			e.printStackTrace();
+		}
+		return getMoveType(board, from, to);
 	}
 
 	@Override
