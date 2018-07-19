@@ -13,19 +13,22 @@ public class Queen extends PieceAbstraction implements MovesAllowed {
 	public Queen(Color color) {
 		super(color);
 	}
-	int deltaX;
-	int deltaY;
 
 	@Override
 	public MoveType checkMoveValid(Board board, Coordinate from, Coordinate to) throws InvalidMoveException {
-		validateMoveDirection(from, to);
-		int pathToPiece = Math.abs(from.getX()) - Math.abs(to.getX());
+		int pathToPiece;
+		if (from.getX() - to.getX() != 0) {
+			pathToPiece = Math.abs(from.getX() - to.getX());
+		} else {
+			pathToPiece = Math.abs(from.getY() - to.getY());
+		}
 		try {
 			validateMoveAndClearPath(board, from, to, pathToPiece);
 		} catch (PathIsNoClearException e) {
 			e.printStackTrace();
 		}
 		return getMoveType(board, from, to);
+
 	}
 
 	@Override

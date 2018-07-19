@@ -4,6 +4,7 @@ import com.capgemini.chess.algorithms.data.Coordinate;
 import com.capgemini.chess.algorithms.data.enums.Color;
 import com.capgemini.chess.algorithms.data.enums.MoveType;
 import com.capgemini.chess.algorithms.data.generated.Board;
+import com.capgemini.chess.algorithms.implementation.exceptions.InvalidKingMoveException;
 import com.capgemini.chess.algorithms.implementation.exceptions.InvalidMoveException;
 
 public class King extends PieceAbstraction implements MovesAllowed {
@@ -22,7 +23,7 @@ public class King extends PieceAbstraction implements MovesAllowed {
 		int deltaX = from.getX() - to.getX();
 		int deltaY = from.getY() - from.getY();
 		if (Math.abs(deltaX) > 1 || Math.abs(deltaY) > 1) {
-			throw new InvalidMoveException("King cant move there. It is against rules for this piece");
+			throw new InvalidKingMoveException();
 		}
 	}
 

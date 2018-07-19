@@ -32,8 +32,8 @@ public class Bishop extends PieceAbstraction implements MovesAllowed {
 		int deltaX = from.getX() - to.getX();
 		int deltaY = from.getY() - from.getY();
 
-		if (!(isNorthDirection(deltaX, deltaY) || isSouthDirection(deltaX, deltaY) || isEastDirection(deltaX, deltaY)
-				|| isWestDirection(deltaX, deltaY)))
+		if (!(isNorthEastDirection(deltaX, deltaY) || isNorthWestDirection(deltaX, deltaY) || isSouthEastDirection(deltaX, deltaY)
+				|| isSouthWestDirection(deltaX, deltaY)))
 			throw new InvalidBishopMoveException();
 	}
 

@@ -226,6 +226,8 @@ public class BoardManagerTest {
 		Board board = new Board();
 		board.setPieceAt(Piece.WHITE_QUEEN, new Coordinate(5, 0));
 		board.setPieceAt(Piece.BLACK_PAWN, new Coordinate(7, 2));
+		board.setPieceAt(Piece.WHITE_KING, new Coordinate(1, 7));
+		board.setPieceAt(Piece.BLACK_KING, new Coordinate(6, 2));
 
 		// when
 		BoardManager boardManager = new BoardManager(board);
@@ -424,6 +426,8 @@ public class BoardManagerTest {
 		Board board = new Board();
 		board.setPieceAt(Piece.WHITE_PAWN, new Coordinate(1, 2));
 		board.setPieceAt(Piece.BLACK_PAWN, new Coordinate(1, 3));
+		board.setPieceAt(Piece.WHITE_KING, new Coordinate(1, 7));
+		board.setPieceAt(Piece.BLACK_KING, new Coordinate(6, 2));
 
 		// when
 		BoardManager boardManager = new BoardManager(board);

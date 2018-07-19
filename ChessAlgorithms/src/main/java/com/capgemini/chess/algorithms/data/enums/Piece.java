@@ -29,11 +29,17 @@ public enum Piece {
         this.color = color;
     }
 
-	public PieceType getType() {
-		return type;
-	}
+
 
 	public Color getColor() {
 		return color;
 	}
+
+
+
+	public PieceType getType() {
+		return type;
+	}
+
+
 }

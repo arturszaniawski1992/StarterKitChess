@@ -4,9 +4,11 @@ import com.capgemini.chess.algorithms.data.Coordinate;
 import com.capgemini.chess.algorithms.data.enums.Color;
 import com.capgemini.chess.algorithms.data.enums.MoveType;
 import com.capgemini.chess.algorithms.data.generated.Board;
+import com.capgemini.chess.algorithms.implementation.exceptions.InvalidKnightMoveException;
 import com.capgemini.chess.algorithms.implementation.exceptions.InvalidMoveException;
 
 public class Knight extends PieceAbstraction implements MovesAllowed {
+	
 	int deltaX;
 	int deltaY;
 
@@ -31,7 +33,7 @@ public class Knight extends PieceAbstraction implements MovesAllowed {
 
 		if ((Math.abs(deltaX) == 2 && Math.abs(deltaY) == 1) || (Math.abs(deltaX) == 1 && Math.abs(deltaY) == 2)) {
 		} else {
-			throw new InvalidMoveException("Knight cant move that way!");
+			throw new InvalidKnightMoveException();
 		}
 	}
 
