@@ -13,14 +13,13 @@ public class MoveManager {
 	private Board board;
 
 	public MoveManager(Board board) {
-		super();
 		this.board = board;
 	}
 
 	public Move validateMove(Coordinate from, Coordinate to) throws InvalidMoveException {
 		new MoveManager(board).initialValidation(from, to);
 		Piece actualPiece = board.getPieceAt(from);
-		PieceAbstraction abstarctionPiece = PieceFactory.createPiece(actualPiece.getType());
+		PieceAbstraction abstarctionPiece = PieceFactory.createPiece(actualPiece.getType(), actualPiece.getColor());
 		MoveType actualMoveType = abstarctionPiece.checkMoveValid(board, from, to);
 		Move move = new Move();
 		move.setFrom(from);

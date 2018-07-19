@@ -231,25 +231,38 @@ public class BoardManager {
 		this.board.setPieceAt(null, lastMove.getTo());
 	}
 
-	private Move validateMove(Coordinate from, Coordinate to) throws InvalidMoveException, KingInCheckException {
-		// TODO please add implementation here
+	private Move validateMove(Coordinate from, Coordinate to) throws InvalidMoveException {
 
-		return null;
-
+		Move validatedMove = new MoveManager(board).validateMove(from, to);
+		return validatedMove;
 	}
 
 	private boolean isKingInCheck(Color kingColor) {
+		boolean isKingInCheck;
+		try {
+			new KingInCheckManager(board).validateIfKingIsInCheck(kingColor);
+			isKingInCheck = false;
+		} catch (KingInCheckException e) {
+			isKingInCheck = true;
+		} catch (InvalidMoveException e) {
+			isKingInCheck = false;
+		}
+		return isKingInCheck;
 
-		// TODO please add implementation here
-
-		return false;
 	}
 
 	private boolean isAnyMoveValid(Color nextMoveColor) {
+		List<Coordinate> actualColorPiecesCoordinates = new PiecesOnBoardManager(board).findPieces(nextMoveColor);
 
-		// TODO please add implementation here
-		// czy jakas figura moze sie ruszyc
-
+		for (Coordinate iteratorCoordinate : actualColorPiecesCoordinates) {
+			for (int row = 0; row < Board.SIZE; row++) {
+				for (int column = 0; column < Board.SIZE; column++) {
+					if (new MoveManager(board).isMoveValid(iteratorCoordinate, new Coordinate(row, column))) {
+						return true;
+					}
+				}
+			}
+		}
 		return false;
 	}
 

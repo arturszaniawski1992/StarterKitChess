@@ -4,9 +4,9 @@ import com.capgemini.chess.algorithms.data.enums.Color;
 import com.capgemini.chess.algorithms.data.enums.PieceType;
 
 public class PieceFactory {
-	public PieceAbstraction createPiece(PieceType type) {
+	public static PieceAbstraction createPiece(PieceType type, Color color) {
+
 		PieceAbstraction piece = null;
-		Color color = null;
 
 		if ((PieceType.KING).equals(type)) {
 			piece = new King(color);

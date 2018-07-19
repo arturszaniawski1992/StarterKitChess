@@ -5,6 +5,7 @@ import com.capgemini.chess.algorithms.data.enums.Color;
 import com.capgemini.chess.algorithms.data.enums.MoveType;
 import com.capgemini.chess.algorithms.data.generated.Board;
 import com.capgemini.chess.algorithms.implementation.exceptions.InvalidMoveException;
+import com.capgemini.chess.algorithms.implementation.exceptions.InvalidPawnMoveException;
 
 public class Pawn extends PieceAbstraction implements MovesAllowed {
 
@@ -25,14 +26,14 @@ public class Pawn extends PieceAbstraction implements MovesAllowed {
 	@Override
 	protected void validateMoveDirection(Coordinate from, Coordinate to) throws InvalidMoveException {
 		if (color.equals(Color.BLACK)) {
-			if (!isWestDirection(deltaX, deltaY) || isSouthWestDirection(deltaX, deltaY)
-					|| isNorthWestDirection(deltaX, deltaY)) {
-				throw new InvalidMoveException("Pawn cant move there. It is against rules for this piece");
+			if (!(isWestDirection(deltaX, deltaY) || isSouthWestDirection(deltaX, deltaY)
+					|| isNorthWestDirection(deltaX, deltaY))) {
+				throw new InvalidPawnMoveException();
 			}
 		} else {
 			if (!(isNorthEastDirection(deltaX, deltaY) || isEastDirection(deltaX, deltaY)
 					|| isSouthEastDirection(deltaX, deltaY))) {
-				throw new InvalidMoveException("Pawn cant move there. It is against rules for this piece");
+				throw new InvalidPawnMoveException();
 			}
 		}
 

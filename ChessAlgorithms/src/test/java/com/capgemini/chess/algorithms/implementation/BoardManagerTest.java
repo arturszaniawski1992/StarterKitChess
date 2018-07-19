@@ -501,6 +501,7 @@ public class BoardManagerTest {
 		Board board = new Board();
 		board.setPieceAt(Piece.WHITE_QUEEN, new Coordinate(1, 1));
 		board.setPieceAt(Piece.BLACK_PAWN, new Coordinate(4, 4));
+		board.setPieceAt(Piece.BLACK_KING, new Coordinate(6, 6));
 
 		// when
 		BoardManager boardManager = new BoardManager(board);
@@ -662,6 +663,7 @@ public class BoardManagerTest {
 		board.getMoveHistory().add(createDummyMove(board));
 		board.setPieceAt(Piece.WHITE_BISHOP, new Coordinate(1, 3));
 		board.setPieceAt(Piece.BLACK_KING, new Coordinate(4, 0));
+		board.setPieceAt(Piece.WHITE_KING, new Coordinate(0, 7));
 
 		// when
 		BoardManager boardManager = new BoardManager(board);
@@ -679,6 +681,7 @@ public class BoardManagerTest {
 		board.setPieceAt(Piece.WHITE_ROOK, new Coordinate(0, 1));
 		board.setPieceAt(Piece.WHITE_ROOK, new Coordinate(1, 0));
 		board.setPieceAt(Piece.BLACK_KING, new Coordinate(4, 0));
+		board.setPieceAt(Piece.WHITE_KING, new Coordinate(0, 7));
 
 		// when
 		BoardManager boardManager = new BoardManager(board);

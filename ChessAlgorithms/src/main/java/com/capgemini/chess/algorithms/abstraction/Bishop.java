@@ -22,9 +22,9 @@ public class Bishop extends PieceAbstraction implements MovesAllowed {
 			validateMoveAndClearPath(board, from, to, pathToPiece);
 		} catch (PathIsNoClearException e) {
 			e.printStackTrace();
-		}
+		}			
 		return getMoveType(board, from, to);
-
+		
 	}
 
 	@Override

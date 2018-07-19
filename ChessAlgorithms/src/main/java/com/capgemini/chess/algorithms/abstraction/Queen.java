@@ -13,6 +13,8 @@ public class Queen extends PieceAbstraction implements MovesAllowed {
 	public Queen(Color color) {
 		super(color);
 	}
+	int deltaX;
+	int deltaY;
 
 	@Override
 	public MoveType checkMoveValid(Board board, Coordinate from, Coordinate to) throws InvalidMoveException {
